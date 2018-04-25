@@ -1,0 +1,9 @@
+{
+  "name": "node-todo-api",
+  "version": "0.0.0",
+  "description": "node-todo-api",
+  "main": "app.js",
+  "author": {
+    "name": "Petin"
+  }
+}
