@@ -5,5 +5,8 @@
   "main": "app.js",
   "author": {
     "name": "Petin"
+  },
+  "dependencies": {
+    "mongodb": "^3.0.7"
   }
 }
