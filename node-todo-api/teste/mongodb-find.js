@@ -1,6 +1,6 @@
-const { MongoClient, ObjectID } = require('mongodb')
+const _MongoClient = require('mongodb').MongoClient
 
-MongoClient.connect('mongodb://127.0.0.1:27017/TodoApiDB', (err, client) => {
+_MongoClient.connect('mongodb://127.0.0.1:27017/TodoApiDB', (err, client) => {
     if (err) {
         return console.log(err)
     }
@@ -29,11 +29,11 @@ MongoClient.connect('mongodb://127.0.0.1:27017/TodoApiDB', (err, client) => {
     //    console.log(JSON.stringify(res.ops, undefined, 2))
     //})
 
-    db.collection('todos').find().count().then((count) => {
-        console.log(count)
+    db.collection('todos').find({complete: false}).toArray().then((docs) => {
+        console.log(JSON.stringify(docs, undefined, 2))
     }, (err) => {
         console.log(err)
     })
 
-    client.close()  
+    client.close()
 })
