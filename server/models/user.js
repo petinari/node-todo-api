@@ -13,12 +13,27 @@ var User = _mongoose.model('User', {
         minLength: 1,
         unique: true,
         validate: {
-            validator: (value) => {
-
-            },
+            validator: _validator.isEmail,
             message : '{value} is not a valid email'
         }
-    }
+    },
+    password: {
+        type: String,
+        required: true,
+        minLength: 6
+    },
+    tokens: [
+        {
+            access: {
+                type: String,
+                required: true
+            },
+            token: {
+                type: String,
+                required: true
+            }
+        }
+    ]
 })
 
 
