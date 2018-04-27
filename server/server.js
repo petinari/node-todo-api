@@ -6,6 +6,7 @@ const _ = require('lodash');
 const { _mongoose } = require("./db/mongoose");
 const Todo = require("./models/todos").Todo;
 const User = require("./models/user").User;
+var authenticate = require('./middleware/authenticate').authenticate
 
 const app = _express();
 
@@ -101,6 +102,14 @@ app.patch('/todos/:id', (req, res) => {
     })
     
 })
+
+
+
+
+
+app.get('/users/me', authenticate, (req, res) => {
+    res.send(req.user);
+});
 
 app.listen(3000, () => {
     console.log('Started on port 3000')
