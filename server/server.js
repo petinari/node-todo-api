@@ -12,15 +12,21 @@ const app = _express();
 app.use(_bodyParser.json());
 
 app.post('/users', (req, res) => {
-    var body = _.pick(req.body, ['email', 'password'])
-    var user = new User(body)
-    console.log(body)
+    var body = _.pick(req.body, ['email', 'password']);
+    var user = new User(body);
+    console.log(user)
     user.save().then((user) => {
-        res.send(user)
+        console.log(user)
+        return user.generateAuthToken();
+    }).then((token) => {
+        res.header('x-auth', token).send({
+            _id: user._id,
+            email: user.email
+        });
     }).catch((e) => {
-        res.status(400).send(e)
+        res.status(400).send(e);
     })
-})
+});
 
 app.post('/todos', (req, res) => {
     var todo = new Todo({
