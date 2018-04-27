@@ -15,9 +15,9 @@ app.use(_bodyParser.json());
 app.post('/users', (req, res) => {
     var body = _.pick(req.body, ['email', 'password']);
     var user = new User(body);
-    console.log(user)
+    console.log(user + 'user antes de salvar')
     user.save().then((user) => {
-        console.log(user)
+        console.log(user + 'apos primeiro save')
         return user.generateAuthToken();
     }).then((token) => {
         res.header('x-auth', token).send({
